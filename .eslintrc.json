@@ -43,7 +43,7 @@
     ],
     "comma-dangle": ["error", "always-multiline"],
     "curly": ["error", "all"],
-    "no-console": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "eqeqeq": "error"
   }
 }

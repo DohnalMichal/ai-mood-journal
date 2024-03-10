@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.7",
+    "@langchain/core": "^0.1.44",
+    "@langchain/openai": "^0.0.18",
     "@prisma/client": "^5.10.2",
+    "langchain": "^0.1.25",
     "next": "14.1.0",
     "react": "^18",
     "react-autosave": "^0.4.4",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",

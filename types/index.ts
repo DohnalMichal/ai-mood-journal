@@ -8,3 +8,5 @@ const JournalEntryWithAnalysis =
 export type JournalEntry = Prisma.JournalEntryGetPayload<
   typeof JournalEntryWithAnalysis
 >
+
+export type QuestionEntry = Pick<JournalEntry, 'id' | 'createdAt' | 'content'>

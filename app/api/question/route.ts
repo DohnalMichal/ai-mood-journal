@@ -11,11 +11,6 @@ export const POST = async (request: Request) => {
     where: {
       userId: user.id,
     },
-    select: {
-      id: true,
-      content: true,
-      createdAt: true,
-    },
   })
 
   const answer = await qa(question, entries)

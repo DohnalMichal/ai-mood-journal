@@ -5,25 +5,17 @@ import { Document } from 'langchain/document'
 import { loadQARefineChain } from 'langchain/chains'
 import { MemoryVectorStore } from 'langchain/vectorstores/memory'
 import { z } from 'zod'
+import { PROMPT_DESCRIPTIONS, PROMPT_TEMPLATE } from '@/constants/ai'
 import type { QuestionEntry } from '@/types'
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
-    mood: z
-      .string()
-      .describe('The mood of the person who wrote the journal entry.'),
-    subject: z.string().describe('The subject of the journal entry.'),
-    summary: z.string().describe('Quick summary of the entire journal entry.'),
-    negative: z
-      .boolean()
-      .describe(
-        'Is the journal entry negative? (i.e. does it contain negative emotions?).',
-      ),
-    color: z
-      .string()
-      .describe(
-        'A hexidecimal color code that represents the mood of the entry. Example #FCDC2A for yellow representing happiness.',
-      ),
+    mood: z.string().describe(PROMPT_DESCRIPTIONS.mood),
+    subject: z.string().describe(PROMPT_DESCRIPTIONS.subject),
+    summary: z.string().describe(PROMPT_DESCRIPTIONS.summary),
+    negative: z.boolean().describe(PROMPT_DESCRIPTIONS.negative),
+    color: z.string().describe(PROMPT_DESCRIPTIONS.color),
+    sentimentScore: z.number().describe(PROMPT_DESCRIPTIONS.sentiment),
   }),
 )
 
@@ -31,8 +23,7 @@ const getPrompt = async (content: string) => {
   const format_instructions = parser.getFormatInstructions()
 
   const prompt = new PromptTemplate({
-    template:
-      'Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n{format_instructions}\n{entry}',
+    template: PROMPT_TEMPLATE,
     inputVariables: ['entry'],
     partialVariables: { format_instructions },
   })

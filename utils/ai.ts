@@ -6,7 +6,7 @@ import { loadQARefineChain } from 'langchain/chains'
 import { MemoryVectorStore } from 'langchain/vectorstores/memory'
 import { z } from 'zod'
 import { PROMPT_DESCRIPTIONS, PROMPT_TEMPLATE } from '@/constants/ai'
-import type { QuestionEntry } from '@/types'
+import type { JournalEntry } from '@prisma/client'
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -47,7 +47,7 @@ export const analyze = async (content: string) => {
   }
 }
 
-export const qa = async (question: string, entries: QuestionEntry[]) => {
+export const qa = async (question: string, entries: JournalEntry[]) => {
   const docs = entries.map((entry) => {
     return new Document({
       pageContent: entry.content,

@@ -6,7 +6,7 @@ import { askQuestion } from '@/utils/api'
 const Question = () => {
   const [value, setValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [response, setResponse] = useState()
+  const [answer, setAnswer] = useState()
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
@@ -17,8 +17,8 @@ const Question = () => {
     event.preventDefault()
 
     setLoading(true)
-    const answer = await askQuestion(value)
-    setResponse(answer)
+    const { data } = await askQuestion(value)
+    setAnswer(data)
     setLoading(false)
     setValue('')
   }
@@ -43,7 +43,7 @@ const Question = () => {
         </button>
       </form>
       {loading && <div>Loading...</div>}
-      {response && <div>{response}</div>}
+      {answer && <div>{answer}</div>}
     </div>
   )
 }

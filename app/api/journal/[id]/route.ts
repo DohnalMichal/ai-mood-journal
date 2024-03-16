@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { analyze } from '@/utils/ai'
@@ -29,6 +30,7 @@ export const PATCH = async (request: Request, { params }: Params) => {
       entryId: updatedEntry.id,
     },
     create: {
+      userId: user.id,
       entryId: updatedEntry.id,
       ...provideDefaults(analysis),
     },
@@ -36,6 +38,8 @@ export const PATCH = async (request: Request, { params }: Params) => {
       ...provideDefaults(analysis),
     },
   })
+
+  revalidatePath('/journal')
 
   return NextResponse.json({
     data: {

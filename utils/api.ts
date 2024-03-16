@@ -6,19 +6,18 @@ export const createNewEntry = async () => {
   const res = await fetch(
     new Request(createURL('/api/journal'), {
       method: 'POST',
+      body: JSON.stringify({ content: 'New entry' }),
     }),
   )
 
   if (res.ok) {
-    const data = await res.json()
-
-    return data.data
+    return res.json()
   } else {
     throw new Error('Something went wrong on API server!')
   }
 }
 
-export const updatedEntry = async (id: string, content: any) => {
+export const updateEntry = async (id: string, content: any) => {
   const res = await fetch(
     new Request(createURL(`/api/journal/${id}`), {
       method: 'PATCH',
@@ -27,9 +26,7 @@ export const updatedEntry = async (id: string, content: any) => {
   )
 
   if (res.ok) {
-    const data = await res.json()
-
-    return data.data
+    return res.json()
   } else {
     throw new Error('Something went wrong on API server!')
   }
@@ -44,9 +41,7 @@ export const askQuestion = async (question: string) => {
   )
 
   if (res.ok) {
-    const data = await res.json()
-
-    return data.data
+    return res.json()
   } else {
     throw new Error('Something went wrong on API server!')
   }

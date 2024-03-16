@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
-import { updatedEntry } from '@/utils/api'
+import { updateEntry } from '@/utils/api'
 import { provideDefaults } from '@/utils/analysis'
 import type { JournalEntry } from '@/types'
 
@@ -26,14 +26,14 @@ const Editor = ({ entry }: Props) => {
 
   useAutosave({
     data: value,
-    onSave: async (updatedValue) => {
-      if (updatedValue === entry.content) {
+    onSave: async (text) => {
+      if (text === entry.content) {
         return
       }
 
       setIsSaving(true)
-      const updated = await updatedEntry(entry.id, { content: updatedValue })
-      setAnalysis(updated.analysis)
+      const { data } = await updateEntry(entry.id, { content: text })
+      setAnalysis(data.analysis)
       setIsSaving(false)
     },
   })

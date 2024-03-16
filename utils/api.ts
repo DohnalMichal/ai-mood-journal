@@ -13,6 +13,8 @@ export const createNewEntry = async () => {
     const data = await res.json()
 
     return data.data
+  } else {
+    throw new Error('Something went wrong on API server!')
   }
 }
 
@@ -28,13 +30,15 @@ export const updatedEntry = async (id: string, content: any) => {
     const data = await res.json()
 
     return data.data
+  } else {
+    throw new Error('Something went wrong on API server!')
   }
 }
 
 export const askQuestion = async (question: string) => {
   const res = await fetch(
-    new Request(createURL(`/api/question}`), {
-      method: 'PATCH',
+    new Request(createURL(`/api/question`), {
+      method: 'POST',
       body: JSON.stringify({ question }),
     }),
   )
@@ -43,5 +47,7 @@ export const askQuestion = async (question: string) => {
     const data = await res.json()
 
     return data.data
+  } else {
+    throw new Error('Something went wrong on API server!')
   }
 }

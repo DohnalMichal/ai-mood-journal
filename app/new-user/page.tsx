@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { currentUser } from '@clerk/nextjs'
 import { prisma } from '@/utils/db'
-import type { User } from '@clerk/backend'
+import type { User } from '@clerk/nextjs/api'
 
 const createNewUser = async () => {
   // User will always be defined because the middleware

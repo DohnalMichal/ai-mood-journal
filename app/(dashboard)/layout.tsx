@@ -12,7 +12,7 @@ const links = [
   { href: '/question', label: 'Ask questions', icon: <QuestionIcon /> },
 ]
 
-const DashboardLayout = ({ children }: React.PropsWithChildren) => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="grid grid-cols-12 h-screen">
       <header className="col-span-12 h-[60px] border-b border-[#E5E8EB]">

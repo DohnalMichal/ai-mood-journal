@@ -29,7 +29,12 @@ const EntryPage = async ({ params }: Props) => {
     return
   }
 
-  return <Editor entry={entry} />
+  return (
+    <div className="p-10 h-full">
+      <h2 className="text-3xl font-bold mb-8">New journal entry</h2>
+      <Editor entry={entry} />
+    </div>
+  )
 }
 
 export default EntryPage

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { auth } from '@clerk/nextjs'
+import Button from '@/components/Button'
 
 export default async function Home() {
   const { userId } = auth()
@@ -16,9 +17,7 @@ export default async function Home() {
         </p>
         <div>
           <Link href={href}>
-            <button className="bg-blue-600 px-4 py-2 rounded-lg text-xl">
-              Get started
-            </button>
+            <Button>Get started</Button>
           </Link>
         </div>
       </div>

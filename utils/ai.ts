@@ -68,3 +68,23 @@ export const qa = async (question: string, entries: JournalEntry[]) => {
 
   return res.output_text
 }
+
+export const getSentimentEmoji = (sentiment?: number) => {
+  if (!sentiment) {
+    return '🤔'
+  }
+
+  if (sentiment <= -8) {
+    return '😢'
+  } else if (sentiment <= -4) {
+    return '😞'
+  } else if (sentiment <= 0) {
+    return '😐'
+  } else if (sentiment <= 4) {
+    return '🙂'
+  } else if (sentiment <= 8) {
+    return '😊'
+  } else {
+    return '🤩'
+  }
+}

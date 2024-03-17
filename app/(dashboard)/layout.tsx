@@ -1,33 +1,35 @@
 import { UserButton } from '@clerk/nextjs'
-import Link from 'next/link'
-import type { ReactNode } from 'react'
+import HomeIcon from '@/icons/Home'
+import JournalIcon from '@/icons/Journal'
+import HistoryIcon from '@/icons/History'
+import QuestionIcon from '@/icons/Question'
+import NavItem from '@/components/NavItem'
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/journal', label: 'Journal' },
-  { href: '/history', label: 'History' },
+  { href: '/', label: 'Home', icon: <HomeIcon /> },
+  { href: '/journal', label: 'Journal', icon: <JournalIcon /> },
+  { href: '/history', label: 'History', icon: <HistoryIcon /> },
+  { href: '/question', label: 'Ask questions', icon: <QuestionIcon /> },
 ]
 
-const DashboardLayout = ({ children }: { children: ReactNode }) => {
+const DashboardLayout = ({ children }: React.PropsWithChildren) => {
   return (
-    <div className="h-screen w-screen relative">
-      <aside className="absolute w-[200px] top-0 left-0 h-full border-r border-black/10">
-        <h1 className="px-2 py-2 text-2xl">AI Mood Journal</h1>
-        <ul className="mt-4 flex flex-col gap-2">
+    <div className="grid grid-cols-12 h-screen">
+      <header className="col-span-12 h-[60px] border-b border-[#E5E8EB]">
+        <div className="h-full w-full px-6 flex items-center justify-between">
+          <h1 className="px-2 py-2 text-2xl font-bold">AI Mood Journal</h1>
+          <UserButton />
+        </div>
+      </header>
+      <aside className="col-span-3">
+        <ul className="mt-4 p-4 flex flex-col gap-2">
           {links.map((link) => (
-            <li key={link.href} className="px-2 text-xl">
-              <Link href={link.href}>{link.label}</Link>
-            </li>
+            <NavItem key={link.href} link={link} />
           ))}
         </ul>
       </aside>
-      <div className="ml-[200px] h-full">
-        <header className="h-[60px] border-b border-black/10">
-          <div className="h-full w-full px-6 flex items-center justify-end">
-            <UserButton />
-          </div>
-        </header>
-        <main className="h-[calc(100vh-60px)]">{children}</main>
+      <div className="col-span-9">
+        <main className="col-span-9 h-[calc(100vh-60px)] p-10">{children}</main>
       </div>
     </div>
   )

@@ -1,12 +1,15 @@
 import { redirect } from 'next/navigation'
-import { currentUser } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs/server'
 import { prisma } from '@/utils/db'
-import type { User } from '@clerk/nextjs/api'
 
 const createNewUser = async () => {
   // User will always be defined because the middleware
   // blocks this page for unauthenticated users.
-  const user = (await currentUser()) as User
+  const user = await currentUser()
+
+  if (!user) {
+    return redirect('/sign-up')
+  }
 
   const match = await prisma.user.findUnique({
     where: {

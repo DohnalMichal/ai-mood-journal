@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { auth } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs/server'
 import Button from '@/components/Button'
 
 export default async function Home() {
-  const { userId } = auth()
+  const { userId } = await auth()
 
-  const href = userId ? '/journal' : '/new-user'
+  const href = userId ? '/journal' : '/sign-up'
 
   return (
     <div className="w-screen h-screen bg-black flex justify-center items-center text-white">

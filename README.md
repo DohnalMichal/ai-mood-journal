@@ -30,25 +30,51 @@ To set up the AI Mood Journal locally, follow these steps:
    ```makefile
    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_XXXXXXXX
    CLERK_SECRET_KEY=sk_test_XXXXXX
-   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/journal
-   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/new-user
    ```
 
-### PlanetScale Serverless SQL Database
+### Supabase Database
 
-1. Add [PlanetScale Database](https://planetscale.com/)
-2. Install [pscale CLI](https://github.com/planetscale/cli#installation)
-3. Use the CLI to connect to the DB: `pscale auth login`
-4. Create a dev database branch: `pscale branch create mood dev`
-5. Start the connection: `pscale connect ai-mood-journal dev --port 3309`
+1. Create a Supabase Account:
+   Sign up at [Supabase](https://app.supabase.com/) and create a new project.
+2. Obtain Your Supabase Credentials:
+   In your Supabase project dashboard, navigate to **Project Settings -> API**. You will find:
+
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+3. Add Supabase Environment Variables to `.env`:
+
+   ```makefile
+   SUPABASE_URL=https://your-project-ref.supabase.co
+   SUPABASE_ANON_KEY=your-anon-key
+   ```
 
 ### Prisma ORM
 
 1. Install Prisma Client: `npm i @prisma/client`
 2. Install Prisma as dev dependency: `npm i prisma --save-dev`
 3. Initialize Prisma: `npx prisma init`
+4. Configure Prisma for Supabase
+   In your new `prisma/schema.prisma` file, update the `datasource` block to point to your Supabase PorsgreSQL connection string. For example:
+   ```prisma
+   datasource db {
+      provider = "postgresql"
+      url      = env("DATABASE_URL")
+   }
+   ```
+   Then add to your `.env` file:
+   ```makefile
+   DATABASE_URL=postgresql://postgres:[YOUR_PASSWORD]@db.[PROJECT_REF].supabase.co:5432/postgres
+   ```
+   (You can find or generate this connection string in the Database section of your Supabase Project Settings.)
+
+#### Prisma Studio
+
+1.  To interact with your database using a visual interface, you can use Prisma Studio. Run the following command:
+    ```bash
+    npx prisma studio
+    ```
+    This command will open Prisma Studio in your default web browser, allowing you to view and edit the data in your Supabase database.
 
 ### OpenAI API Account setup
 

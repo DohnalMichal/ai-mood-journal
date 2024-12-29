@@ -7,8 +7,8 @@ const SignUpPage = () => {
         path="/sign-up"
         routing="path"
         signInUrl="/sign-in"
-        redirectUrl="/new-user"
-        afterSignUpUrl="/new-user"
+        fallbackRedirectUrl="/journal"
+        signInFallbackRedirectUrl="/journal"
       />
     </div>
   )

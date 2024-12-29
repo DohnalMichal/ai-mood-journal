@@ -41,7 +41,7 @@ type Props = {
 
 const HistoryChart = ({ data }: Props) => {
   return (
-    <ResponsiveContainer width="100%" height="60%">
+    <ResponsiveContainer width="100%" height="50%">
       <LineChart data={data}>
         <Line
           dataKey="sentimentScore"
@@ -50,7 +50,16 @@ const HistoryChart = ({ data }: Props) => {
           strokeWidth={3}
           activeDot={{ r: 8 }}
         />
-        <XAxis dataKey="createdAt" />
+        <XAxis
+          dataKey="createdAt"
+          tickFormatter={(value) =>
+            new Date(value).toLocaleDateString('en-GB', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })
+          }
+        />
         <Tooltip content={<CustomTooltip />} />
       </LineChart>
     </ResponsiveContainer>

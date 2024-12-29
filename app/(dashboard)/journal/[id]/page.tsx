@@ -4,7 +4,7 @@ import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 
 type Props = {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 const getEntry = async (id: string) => {
@@ -23,7 +23,8 @@ const getEntry = async (id: string) => {
 }
 
 const EntryPage = async ({ params }: Props) => {
-  const entry = await getEntry(params.id)
+  const { id } = await params
+  const entry = await getEntry(id)
 
   if (!entry) {
     return

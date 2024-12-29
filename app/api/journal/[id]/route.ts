@@ -6,17 +6,19 @@ import { analyze } from '@/utils/ai'
 import { provideDefaults } from '@/utils/analysis'
 
 type Params = {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export const PATCH = async (request: Request, { params }: Params) => {
   const { content } = await request.json()
   const user = await getUserByClerkID()
+  
+  const { id } = await params
 
   const updatedEntry = await prisma.journalEntry.update({
     where: {
       userId_id: {
-        id: params.id,
+        id,
         userId: user.id,
       },
     },

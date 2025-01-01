@@ -37,6 +37,8 @@ const HistoryChart = ({ data }: HistoryChartProps) => {
       data.length,
   )
 
+  // TODO: Refine trending calculation to be more accurate for negative numbers as well.
+  // Also handle a state where both scores are the same - there is no trend.
   // Calculate percentage difference from first to last sentiment
   const firstScore = data[0].sentimentScore
   const lastScore = data[data.length - 1].sentimentScore

@@ -12,7 +12,7 @@ type Params = {
 export const PATCH = async (request: Request, { params }: Params) => {
   const { content } = await request.json()
   const user = await getUserByClerkID()
-  
+
   const { id } = await params
 
   const updatedEntry = await prisma.journalEntry.update({
@@ -49,4 +49,48 @@ export const PATCH = async (request: Request, { params }: Params) => {
       analysis: updatedAnalysis,
     },
   })
+}
+
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } },
+) {
+  const { id } = params
+
+  try {
+    const user = await getUserByClerkID()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Fetch the JournalEntry along with its related Analysis
+    const entry = await prisma.journalEntry.findUnique({
+      where: {
+        userId_id: { userId: user.id, id },
+      },
+      select: {
+        analysis: {
+          select: {
+            subject: true, // Fetch the 'subject' from Analysis
+          },
+        },
+      },
+    })
+
+    if (!entry || !entry.analysis) {
+      return NextResponse.json(
+        { error: 'Entry not found or no analysis available' },
+        { status: 404 },
+      )
+    }
+
+    return NextResponse.json({ title: entry.analysis.subject })
+  } catch (error) {
+    console.error('Error fetching journal entry:', error)
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 },
+    )
+  }
 }

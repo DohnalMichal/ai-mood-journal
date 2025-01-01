@@ -22,6 +22,7 @@ const getEntry = async (id: string) => {
   return entry
 }
 
+// TODO: Add an option to change date of the entry.
 const EntryPage = async ({ params }: Props) => {
   const { id } = await params
   const entry = await getEntry(id)

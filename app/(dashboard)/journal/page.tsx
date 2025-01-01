@@ -26,13 +26,13 @@ const JournalPage = async () => {
 
   return (
     <>
-      <h2 className="text-3xl font-bold mb-8">Journal</h2>
+      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        Journal
+      </h2>
       <NewEntry />
       <div className="mt-8 grid grid-cols-3 gap-4">
         {entries.map((entry) => (
-          <Link key={entry.id} href={`/journal/${entry.id}`}>
-            <EntryCard entry={entry} />
-          </Link>
+          <EntryCard key={entry.id} entry={entry} />
         ))}
       </div>
     </>

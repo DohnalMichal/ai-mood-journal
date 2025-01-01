@@ -1,7 +1,7 @@
 'use client'
 
 import { type ChangeEvent, type FormEvent, useState } from 'react'
-import { Button } from '@/components/button'
+import { Button } from '@/components/ui/button'
 import { askQuestion } from '@/utils/api'
 
 const Question = () => {
@@ -26,7 +26,7 @@ const Question = () => {
 
   return (
     <div className="h-full flex flex-col pr-8">
-      <h2 className="text-xl font-semibold mb-2">
+      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         Ask a question about your journal
       </h2>
       <p className="w-3/4 mb-4">

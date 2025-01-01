@@ -33,7 +33,9 @@ const EntryPage = async ({ params }: Props) => {
 
   return (
     <div className="p-10 h-full">
-      <h2 className="text-3xl font-bold mb-8">New journal entry</h2>
+      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        New journal entry
+      </h2>
       <Editor entry={entry} />
     </div>
   )

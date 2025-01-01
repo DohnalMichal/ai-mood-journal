@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { auth } from '@clerk/nextjs/server'
-import { Button } from '@/components/button'
+import { Button } from '@/components/ui/button'
 
 export default async function Home() {
   const { userId } = await auth()
@@ -18,9 +18,12 @@ export default async function Home() {
           journal your daily emotions and experiences.
         </p>
         <div>
-          <Link href={href}>
-            <Button>Get started</Button>
-          </Link>
+          <Button
+            asChild
+            className="bg-blue-500 text-gray-50 hover:bg-blue-600 transition-all"
+          >
+            <Link href={href}>Get started</Link>
+          </Button>
         </div>
       </div>
     </div>

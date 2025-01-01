@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { createNewEntry } from '@/utils/api'
-import { Button } from '@/components/button'
+import { Button } from '@/components/ui/button'
 
 const NewEntry = () => {
   const router = useRouter()
@@ -12,11 +12,7 @@ const NewEntry = () => {
     router.push(`/journal/${data.id}`)
   }
 
-  return (
-    <Button onClick={handleOnClick}>
-      <span className="font-semibold">New Entry</span>
-    </Button>
-  )
+  return <Button onClick={handleOnClick}>New Entry</Button>
 }
 
 export { NewEntry }

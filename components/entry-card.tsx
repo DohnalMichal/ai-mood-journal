@@ -15,7 +15,7 @@ import Link from 'next/link'
 import type { JournalEntry } from '@/types'
 
 const EntryCard = ({ entry }: { entry: JournalEntry }) => {
-  const date = format(new Date(entry.createdAt), 'dd.MM.yyyy')
+  const date = format(new Date(entry.createdAt), 'd MMMM yyyy')
 
   return (
     <Card className="h-72 flex flex-col justify-between">
@@ -34,7 +34,7 @@ const EntryCard = ({ entry }: { entry: JournalEntry }) => {
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <small className="text-sm font-medium leading-none flex items-center gap-2">
-          <CalendarDays size={16} /> Date: {date}
+          <CalendarDays size={16} /> {date}
         </small>
 
         <small className="text-sm font-medium leading-none flex items-center gap-2">

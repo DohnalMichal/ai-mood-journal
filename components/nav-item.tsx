@@ -18,7 +18,9 @@ const NavItem = ({ link }: Props) => {
   return (
     <Link href={link.href}>
       <li
-        className={`px-3 py-1 text-xl ${isActiveLink(link.href) ? 'bg-gray-100' : ''} hover:bg-gray-100  rounded-xl cursor-pointer flex items-center gap-4`}
+        className={`px-3 py-1 text-xl ${
+          isActiveLink(link.href) ? 'bg-gray-100' : ''
+        } hover:bg-gray-100  rounded-xl cursor-pointer flex items-center gap-4`}
       >
         {link.icon}
         {link.label}
@@ -27,4 +29,4 @@ const NavItem = ({ link }: Props) => {
   )
 }
 
-export default NavItem
+export { NavItem }

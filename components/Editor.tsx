@@ -71,4 +71,4 @@ const Editor = ({ entry }: { entry: JournalEntry }) => {
   )
 }
 
-export default Editor
+export { Editor }

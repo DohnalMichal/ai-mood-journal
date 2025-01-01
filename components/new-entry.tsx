@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { createNewEntry } from '@/utils/api'
-import Button from './Button'
+import { Button } from '@/components/button'
 
 const NewEntry = () => {
   const router = useRouter()
@@ -19,4 +19,4 @@ const NewEntry = () => {
   )
 }
 
-export default NewEntry
+export { NewEntry }

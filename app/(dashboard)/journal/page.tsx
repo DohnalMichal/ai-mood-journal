@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import EntryCard from '@/components/EntryCard'
-import NewEntry from '@/components/NewEntry'
+import { EntryCard } from '@/components/entry-card'
+import { NewEntry } from '@/components/new-entry'
 import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 

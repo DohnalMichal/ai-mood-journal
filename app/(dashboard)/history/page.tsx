@@ -1,4 +1,4 @@
-import HistoryChart from '@/components/HistoryChart'
+import { HistoryChart } from '@/components/history-chart'
 import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 

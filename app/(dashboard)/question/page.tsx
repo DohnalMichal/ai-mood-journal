@@ -1,4 +1,4 @@
-import Question from '@/components/Question'
+import { Question } from '@/components/question'
 
 const QuestionPage = () => {
   return <Question />

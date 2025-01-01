@@ -1,7 +1,7 @@
 'use client'
 
 import { type ChangeEvent, type FormEvent, useState } from 'react'
-import Button from '@/components/Button'
+import { Button } from '@/components/button'
 import { askQuestion } from '@/utils/api'
 
 const Question = () => {
@@ -59,4 +59,4 @@ const Question = () => {
   )
 }
 
-export default Question
+export { Question }

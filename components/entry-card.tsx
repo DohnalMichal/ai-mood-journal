@@ -24,4 +24,4 @@ const EntryCard = ({ entry }: { entry: JournalEntry }) => {
   )
 }
 
-export default EntryCard
+export { EntryCard }

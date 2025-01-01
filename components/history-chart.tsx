@@ -2,14 +2,7 @@
 
 import { TrendingUp, TrendingDown } from 'lucide-react'
 
-import {
-  CartesianGrid,
-  LabelList,
-  Line,
-  LineChart,
-  TooltipProps,
-  XAxis,
-} from 'recharts'
+import { CartesianGrid, Line, LineChart, TooltipProps, XAxis } from 'recharts'
 import type { Analysis } from '@prisma/client'
 
 import {
@@ -126,4 +119,4 @@ const HistoryChart = ({ data }: HistoryChartProps) => {
   )
 }
 
-export default HistoryChart
+export { HistoryChart }

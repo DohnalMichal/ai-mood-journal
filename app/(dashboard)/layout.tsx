@@ -3,7 +3,7 @@ import HomeIcon from '@/icons/Home'
 import JournalIcon from '@/icons/Journal'
 import HistoryIcon from '@/icons/History'
 import QuestionIcon from '@/icons/Question'
-import NavItem from '@/components/NavItem'
+import { NavItem } from '@/components/nav-item'
 
 const links = [
   { href: '/', label: 'Home', icon: <HomeIcon /> },

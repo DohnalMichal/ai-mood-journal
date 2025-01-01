@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import { capitalize } from 'lodash'
-import { getSentimentIcon } from '@/utils/ai'
+import { getSentimentEmoji } from '@/utils/ai'
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { CalendarDays } from 'lucide-react'
+import { CalendarDays, Circle } from 'lucide-react'
 import { Button } from './ui/button'
 import Link from 'next/link'
 import type { JournalEntry } from '@/types'
@@ -20,7 +20,14 @@ const EntryCard = ({ entry }: { entry: JournalEntry }) => {
   return (
     <Card className="h-72 flex flex-col justify-between">
       <CardHeader>
-        <CardTitle>{entry.analysis?.subject}</CardTitle>
+        <CardTitle className="flex gap-2 h-8">
+          <Circle
+            size={16}
+            fill={entry.analysis?.color}
+            className="flex-shrink-0"
+          />
+          <span>{entry.analysis?.subject}</span>
+        </CardTitle>
         <CardDescription className="line-clamp-3">
           {entry.analysis?.summary}
         </CardDescription>
@@ -31,11 +38,10 @@ const EntryCard = ({ entry }: { entry: JournalEntry }) => {
         </small>
 
         <small className="text-sm font-medium leading-none flex items-center gap-2">
-          {getSentimentIcon(
-            entry.analysis?.sentimentScore,
-            entry.analysis?.color,
-          )}
-          {capitalize(entry.analysis?.mood)}
+          <span className="w-4">
+            {getSentimentEmoji(entry.analysis?.sentimentScore)}
+          </span>
+          <span>{capitalize(entry.analysis?.mood)}</span>
         </small>
       </CardContent>
       <CardFooter className="flex justify-between">

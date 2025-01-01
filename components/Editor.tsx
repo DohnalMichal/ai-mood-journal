@@ -6,6 +6,8 @@ import { capitalize, toString } from 'lodash'
 import { updateEntry } from '@/utils/api'
 import { provideDefaults } from '@/utils/analysis'
 import type { JournalEntry } from '@/types'
+import { Textarea } from './ui/textarea'
+import { Label } from './ui/label'
 
 const Editor = ({ entry }: { entry: JournalEntry }) => {
   const [value, setValue] = useState(entry.content)
@@ -38,21 +40,24 @@ const Editor = ({ entry }: { entry: JournalEntry }) => {
 
   return (
     <div className="w-full h-full flex flex-col gap-16 pr-8">
-      <div className="w-full h-2/5">
-        {isSaving && <div>Saving...</div>}
-        <textarea
+      <div className="w-full h-4/5">
+        <Label htmlFor="journal-entry">Write your thoughts</Label>
+
+        <Textarea
+          id="journal-entry"
           placeholder="Write your journal entry here"
-          className="w-full h-full p-4 text-md outline-none bg-[#E8F0F2] focus:bg-white border border-[#D1DEE8] rounded-xl"
+          className="w-full h-full px-4 py-2 text-md outline-none bg-[#E8F0F2] focus:bg-white border border-[#D1DEE8] rounded-xl"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
+        {isSaving && <p className="text-sm text-muted-foreground">Saving...</p>}
       </div>
       <div>
         <div className="flex items-center py-3 gap-2">
           <div className="rounded-full w-3 h-3" style={{ background: color }} />
-          <h2 className="text-xl font-semibold">
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Analysis of your journal entry
-          </h2>
+          </h3>
         </div>
 
         <ul className="w-2/3">

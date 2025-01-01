@@ -78,20 +78,22 @@ export const qa = async (question: string, entries: JournalEntry[]) => {
   return res.output_text
 }
 
-export const getSentimentIcon = (sentiment?: number, color?: string) => {
-  const iconMap = [
-    { threshold: -8, Icon: Angry },
-    { threshold: -4, Icon: Frown },
-    { threshold: 0, Icon: Annoyed },
-    { threshold: 4, Icon: Smile },
-    { threshold: 8, Icon: SmilePlus },
-    { threshold: Infinity, Icon: Laugh },
-  ]
-
-  if (sentiment == null) {
-    return <CircleHelp size={16} style={{ fill: color }} />
+export const getSentimentEmoji = (sentiment?: number) => {
+  if (!sentiment) {
+    return '🤔'
   }
 
-  const { Icon } = iconMap.find(({ threshold }) => sentiment <= threshold) || {}
-  return Icon ? <Icon size={16} style={{ fill: color }} /> : null
+  if (sentiment <= -8) {
+    return '😢'
+  } else if (sentiment <= -4) {
+    return '😞'
+  } else if (sentiment <= 0) {
+    return '😐'
+  } else if (sentiment <= 4) {
+    return '🙂'
+  } else if (sentiment <= 8) {
+    return '😊'
+  } else {
+    return '🤩'
+  }
 }

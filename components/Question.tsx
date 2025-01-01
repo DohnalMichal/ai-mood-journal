@@ -55,10 +55,6 @@ const Question = () => {
       <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         Ask a question about your journal
       </h2>
-      {/* <p className="w-3/4 mb-4">
-        You can ask questions about your journal entries, and the AI will
-        respond with what it thinks you&apos;re asking about.
-      </p> */}
       <Form {...form}>
         <form
           className="flex flex-col gap-4"

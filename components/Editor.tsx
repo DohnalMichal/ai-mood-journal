@@ -46,7 +46,7 @@ const Editor = ({ entry }: { entry: JournalEntry }) => {
         <Textarea
           id="journal-entry"
           placeholder="Write your journal entry here"
-          className="w-full h-full px-4 py-2 text-md outline-none bg-[#E8F0F2] focus:bg-white border border-[#D1DEE8] rounded-xl"
+          className="w-full h-full px-4 py-2 text-md"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />

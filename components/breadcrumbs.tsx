@@ -81,7 +81,7 @@ const Breadcrumbs = () => {
   })
 
   return (
-    <Breadcrumb>
+    <Breadcrumb className="text-foreground">
       <BreadcrumbList>{breadcrumbs}</BreadcrumbList>
     </Breadcrumb>
   )

@@ -20,10 +20,8 @@ const History = async () => {
   const analyses = await getData()
 
   return (
-    <div className="h-full">
-      <div className="h-full">
-        <HistoryChart data={analyses} />
-      </div>
+    <div className="h-full text-foreground">
+      <HistoryChart data={analyses} />
     </div>
   )
 }

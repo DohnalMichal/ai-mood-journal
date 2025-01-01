@@ -28,7 +28,7 @@ const EntryCard = ({ entry }: { entry: JournalEntry }) => {
           />
           <span>{entry.analysis?.subject}</span>
         </CardTitle>
-        <CardDescription className="line-clamp-3">
+        <CardDescription className="line-clamp-3 h-[60px]">
           {entry.analysis?.summary}
         </CardDescription>
       </CardHeader>

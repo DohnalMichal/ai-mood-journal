@@ -30,7 +30,7 @@ const JournalPage = async () => {
         Journal
       </h2>
       <NewEntry />
-      <div className="mt-8 grid grid-cols-3 gap-4">
+      <div className="mt-8 grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-4">
         {entries.map((entry) => (
           <EntryCard key={entry.id} entry={entry} />
         ))}

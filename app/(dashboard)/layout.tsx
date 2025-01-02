@@ -8,6 +8,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar'
+import { UserButton } from '@clerk/nextjs'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -15,12 +16,19 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <AppSidebar />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4 w-full">
+          <div className="flex items-center gap-2 py-2 px-4 w-full">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumbs />
-            <div className="ml-auto">
+            <div className="ml-auto flex items-center gap-4">
               <ThemeToggle />
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: 'w-9 h-9',
+                  },
+                }}
+              />
             </div>
           </div>
         </header>

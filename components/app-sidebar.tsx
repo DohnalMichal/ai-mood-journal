@@ -49,9 +49,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={items} />
       </SidebarContent>
-      <SidebarFooter className="p-4">
-        <UserButton />
-      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )

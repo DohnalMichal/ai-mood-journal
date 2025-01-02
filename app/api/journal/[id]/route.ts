@@ -51,11 +51,8 @@ export const PATCH = async (request: Request, { params }: Params) => {
   })
 }
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = params
+export async function GET(request: Request, { params }: Params) {
+  const { id } = await params
 
   try {
     const user = await getUserByClerkID()

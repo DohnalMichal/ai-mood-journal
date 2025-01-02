@@ -18,7 +18,7 @@ datasource db {
 model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 
   clerkId  String         @unique
   email    String         @unique
@@ -29,7 +29,7 @@ model User {
 model JournalEntry {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
@@ -44,7 +44,7 @@ model JournalEntry {
 model Analysis {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 
   entryId String
   entry   JournalEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)

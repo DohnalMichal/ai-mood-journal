@@ -6,13 +6,10 @@ import { NavMain } from '@/components/nav-main'
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenuButton,
-  SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar'
-import { UserButton } from '@clerk/nextjs'
 
 const items = [
   {

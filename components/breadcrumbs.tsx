@@ -47,8 +47,6 @@ const Breadcrumbs = () => {
     fetchLabels()
   }, [pathname])
 
-  console.log(dynamicLabels)
-
   // Build the breadcrumb items
   const breadcrumbs = segments.map((segment, index) => {
     const href = '/' + segments.slice(0, index + 1).join('/')

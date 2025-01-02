@@ -2,7 +2,7 @@
 
 import { TrendingUp, TrendingDown } from 'lucide-react'
 
-import { CartesianGrid, Line, LineChart, TooltipProps, XAxis } from 'recharts'
+import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
 import type { Analysis } from '@prisma/client'
 
 import {
@@ -37,17 +37,32 @@ const HistoryChart = ({ data }: HistoryChartProps) => {
       data.length,
   )
 
-  // TODO: Refine trending calculation to be more accurate for negative numbers as well.
-  // Also handle a state where both scores are the same - there is no trend.
-  // Calculate percentage difference from first to last sentiment
-  const firstScore = data[0].sentimentScore
-  const lastScore = data[data.length - 1].sentimentScore
+  /**
+   * TREND CALCULATION:
+   * We only calculate a trend if there are at least 2 data entries.
+   * Trend is based on the last and the second-to-last data point.
+   *
+   * Because sentiment can range from -10 to +10 (range = 20),
+   * a difference of +10 or -10 would be 100% or -100% shift.
+   *
+   * trendingPercentage = ((lastScore - secondLastScore) / 20) * 100
+   */
+  const calulateTrending = () => {
+    let trendingPercentage = 0
 
-  let trendingPercentage = 0
-  if (firstScore !== 0) {
-    trendingPercentage = ((lastScore - firstScore) / firstScore) * 100
+    if (data.length >= 2) {
+      const secondLastScore = data[data.length - 2].sentimentScore
+      const lastScore = data[data.length - 1].sentimentScore
+
+      // Calculate the trend
+      trendingPercentage = ((lastScore - secondLastScore) / 20) * 100
+    }
+
+    return trendingPercentage
   }
 
+  const showTrend = data.length >= 2
+  const trendingPercentage = calulateTrending()
   const isTrendUp = trendingPercentage > 0
 
   return (
@@ -96,23 +111,29 @@ const HistoryChart = ({ data }: HistoryChartProps) => {
         <div className="flex gap-2 font-medium leading-none">
           <span>Average Sentiment: {averageSentiment}</span>
         </div>
-        <div className="flex gap-2 font-medium leading-none">
-          {isTrendUp ? (
-            <>
-              <span>
-                Trending up by {Math.abs(trendingPercentage).toFixed(0)}%
-              </span>
-              <TrendingUp className="h-4 w-4 text-green-500" />
-            </>
-          ) : (
-            <>
-              <span>
-                Trending down by {Math.abs(trendingPercentage).toFixed(0)}%
-              </span>
-              <TrendingDown className="h-4 w-4 text-red-500" />
-            </>
-          )}
-        </div>
+        {showTrend ? (
+          <div className="flex gap-2 font-medium leading-none">
+            {isTrendUp ? (
+              <>
+                <span>
+                  Trending up by {Math.abs(trendingPercentage).toFixed(0)}%
+                </span>
+                <TrendingUp className="h-4 w-4 text-green-500" />
+              </>
+            ) : (
+              <>
+                <span>
+                  Trending down by {Math.abs(trendingPercentage).toFixed(0)}%
+                </span>
+                <TrendingDown className="h-4 w-4 text-red-500" />
+              </>
+            )}
+          </div>
+        ) : (
+          <div className="text-sm italic text-muted-foreground">
+            Not enough data to determine a trend
+          </div>
+        )}
         <div className="leading-none text-muted-foreground">
           Showing your mood for the last {data.length} entries
         </div>

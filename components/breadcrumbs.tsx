@@ -21,6 +21,7 @@ const Breadcrumbs = () => {
     {},
   )
 
+  // TODO: Find a better way to handle dynamic breadcrumb labels.
   useEffect(() => {
     const fetchLabels = async () => {
       const newLabels: { [key: string]: string } = {}
@@ -48,7 +49,8 @@ const Breadcrumbs = () => {
     }
 
     fetchLabels()
-  }, [pathname, segments])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
   // Build the breadcrumb items
   const breadcrumbs = segments.map((segment, index) => {

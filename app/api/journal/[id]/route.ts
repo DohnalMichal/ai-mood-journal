@@ -107,7 +107,7 @@ export const DELETE = async (request: Request, { params }: Params) => {
     },
   })
 
-  // revalidatePath('/journal')
+  revalidatePath('/journal')
 
   return NextResponse.json({ data: deletedEntry })
 }

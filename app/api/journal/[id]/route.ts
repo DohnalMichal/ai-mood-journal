@@ -51,7 +51,7 @@ export const PATCH = async (request: Request, { params }: Params) => {
   })
 }
 
-export async function GET(request: Request, { params }: Params) {
+export const GET = async (request: Request, { params }: Params) => {
   const { id } = await params
 
   try {
@@ -90,4 +90,23 @@ export async function GET(request: Request, { params }: Params) {
       { status: 500 },
     )
   }
+}
+
+export const DELETE = async (request: Request, { params }: Params) => {
+  const { id } = await params
+
+  const user = await getUserByClerkID()
+
+  const deletedEntry = await prisma.journalEntry.delete({
+    where: {
+      userId_id: {
+        id,
+        userId: user.id,
+      },
+    },
+  })
+
+  // revalidatePath('/journal')
+
+  return NextResponse.json({ data: deletedEntry })
 }

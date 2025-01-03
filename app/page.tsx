@@ -15,12 +15,12 @@ export default async function Home() {
           <ul className="flex flex-row space-x-4">
             <li>
               <Button asChild>
-                <Link href="/sign-up">Sign up</Link>
+                <Link href="/sign-in">Sign in</Link>
               </Button>
             </li>
             <li>
               <Button asChild>
-                <Link href="/sign-in">Sign in</Link>
+                <Link href="/sign-up">Sign up</Link>
               </Button>
             </li>
           </ul>

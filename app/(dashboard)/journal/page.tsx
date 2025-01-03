@@ -3,6 +3,7 @@ import { EntryCard } from '@/components/entry-card'
 import { NewEntry } from '@/components/new-entry'
 import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
+import { Entries } from '@/components/entries'
 
 const getEntries = async () => {
   const user = await getUserByClerkID()
@@ -30,11 +31,7 @@ const JournalPage = async () => {
         Journal
       </h2>
       <NewEntry />
-      <div className="mt-8 grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-4">
-        {entries.map((entry) => (
-          <EntryCard key={entry.id} entry={entry} />
-        ))}
-      </div>
+      <Entries entries={entries} />
     </>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { format } from 'date-fns'
 import { capitalize } from 'lodash'
 import { getSentimentEmoji } from '@/utils/ai'
@@ -9,12 +11,29 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { CalendarDays, Circle } from 'lucide-react'
+import { CalendarDays, Circle, Trash2 } from 'lucide-react'
 import { Button } from './ui/button'
 import Link from 'next/link'
 import type { JournalEntry } from '@/types'
 
-const EntryCard = ({ entry }: { entry: JournalEntry }) => {
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+
+type Props = {
+  entry: JournalEntry
+  onDelete: () => void
+}
+
+const EntryCard = ({ entry, onDelete }: Props) => {
   const date = format(new Date(entry.createdAt), 'd MMMM yyyy')
 
   return (
@@ -48,8 +67,29 @@ const EntryCard = ({ entry }: { entry: JournalEntry }) => {
         <Button variant="outline" asChild>
           <Link href={`/journal/${entry.id}`}>View</Link>
         </Button>
-        {/* TODO: Implement */}
-        {/* <Button variant="destructive">Delete</Button> */}
+
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="outline">
+              <Trash2 />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                Do you want to delete this entry?
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                journal entry and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={onDelete}>Delete</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </CardFooter>
     </Card>
   )

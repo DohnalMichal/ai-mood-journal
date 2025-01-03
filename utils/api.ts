@@ -32,6 +32,20 @@ export const updateEntry = async (id: string, content: any) => {
   }
 }
 
+export const deleteEntry = async (id: string) => {
+  const res = await fetch(
+    new Request(createURL(`/api/journal/${id}`), {
+      method: 'DELETE',
+    }),
+  )
+
+  if (res.ok) {
+    return res.json()
+  } else {
+    throw new Error('Something went wrong on API server!')
+  }
+}
+
 export const askQuestion = async (question: string) => {
   const res = await fetch(
     new Request(createURL(`/api/question`), {

@@ -64,7 +64,7 @@ const EntryCard = ({ entry, onDelete }: Props) => {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline" asChild>
-          <Link href={`/journal/${entry.id}`}>View</Link>
+          <Link href={`/journal/${entry.id}`}>Edit</Link>
         </Button>
 
         <AlertDialog>

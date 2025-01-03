@@ -14,12 +14,12 @@ export default async function Home() {
         <nav>
           <ul className="flex flex-row space-x-4">
             <li>
-              <Button asChild>
-                <Link href="/sign-in">Sign in</Link>
+              <Button variant="ghost" asChild>
+                <Link href="/sign-in">Log in</Link>
               </Button>
             </li>
             <li>
-              <Button asChild>
+              <Button variant="default" asChild>
                 <Link href="/sign-up">Sign up</Link>
               </Button>
             </li>

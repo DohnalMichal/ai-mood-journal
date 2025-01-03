@@ -7,15 +7,6 @@ import { MemoryVectorStore } from 'langchain/vectorstores/memory'
 import { z } from 'zod'
 import { PROMPT_DESCRIPTIONS, PROMPT_TEMPLATE } from '@/constants/ai'
 import type { JournalEntry } from '@prisma/client'
-import {
-  Angry,
-  Annoyed,
-  CircleHelp,
-  Frown,
-  Laugh,
-  Smile,
-  SmilePlus,
-} from 'lucide-react'
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({

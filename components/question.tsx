@@ -1,11 +1,11 @@
 'use client'
 
-import { type ChangeEvent, type FormEvent, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { askQuestion } from '@/utils/api'
+import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { askQuestion } from '@/utils/api'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -24,14 +24,8 @@ const FormSchema = z.object({
 })
 
 const Question = () => {
-  const [value, setValue] = useState('')
   const [loading, setLoading] = useState(false)
   const [answer, setAnswer] = useState()
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault()
-    setValue(event.target.value)
-  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -41,17 +35,14 @@ const Question = () => {
   })
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-    // event.preventDefault()
-
     setLoading(true)
     const { data } = await askQuestion(values.question)
     setAnswer(data)
     setLoading(false)
-    setValue('')
   }
 
   return (
-    <div className="h-full flex flex-col pr-8">
+    <div className="flex h-full flex-col pr-8">
       <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         Ask a question about your journal
       </h2>

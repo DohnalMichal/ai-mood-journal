@@ -12,7 +12,7 @@ export default function Loading() {
         <Skeleton className="aspect-video" />
       </div>
 
-      <div className="flex p-6 pt-0 flex-col gap-2">
+      <div className="flex flex-col gap-2 p-6 pt-0">
         <Skeleton className="h-3.5 w-3/12" />
         <Skeleton className="h-4 w-4/12" />
         <Skeleton className="h-3.5 w-1/2" />

@@ -8,8 +8,8 @@ export default async function Home() {
   const href = userId ? '/journal' : '/sign-up'
 
   return (
-    <div className="w-screen h-screen dark bg-background flex flex-col items-center text-foreground">
-      <header className="max-w-5xl p-8 w-full flex flex-row justify-between">
+    <div className="dark flex h-screen w-screen flex-col items-center bg-background text-foreground">
+      <header className="flex w-full max-w-5xl flex-row justify-between p-8">
         <span className="font-bold tracking-tight">AI Journal</span>
         <nav>
           <ul className="flex flex-row space-x-4">
@@ -26,11 +26,11 @@ export default async function Home() {
           </ul>
         </nav>
       </header>
-      <div className="w-full h-full max-w-3xl mx-auto flex flex-col justify-center">
+      <div className="mx-auto flex h-full w-full max-w-3xl flex-col justify-center">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-6xl">
           Unlock Your Potential: Journaling, Supercharged by AI.
         </h1>
-        <p className="text-2xl text-muted-foreground leading-7 mt-6">
+        <p className="mt-6 text-2xl leading-7 text-muted-foreground">
           Cutting-edge web app powered by artificial intelligence. Seamlessly
           journal your daily emotions and experiences.
         </p>
@@ -38,7 +38,7 @@ export default async function Home() {
           <Button
             asChild
             size="lg"
-            className="mt-10 bg-blue-500 text-gray-50 hover:bg-blue-600 transition-all text-lg"
+            className="mt-10 bg-blue-500 text-lg text-gray-50 transition-all hover:bg-blue-600"
           >
             <Link href={href}>Get started</Link>
           </Button>

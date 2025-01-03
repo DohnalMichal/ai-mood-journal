@@ -85,6 +85,7 @@ export const GET = async (request: Request, { params }: Params) => {
     return NextResponse.json({ title: entry.analysis.subject })
   } catch (error) {
     console.error('Error fetching journal entry:', error)
+
     return NextResponse.json(
       { error: 'Internal Server Error' },
       { status: 500 },

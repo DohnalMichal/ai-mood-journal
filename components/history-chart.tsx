@@ -3,7 +3,6 @@
 import { TrendingUp, TrendingDown } from 'lucide-react'
 
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts'
-import type { Analysis } from '@prisma/client'
 
 import {
   Card,
@@ -14,11 +13,12 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
+import type { ChartConfig } from '@/components/ui/chart'
+import type { Analysis } from '@prisma/client'
 
 const chartConfig: ChartConfig = {
   sentimentScore: {
@@ -27,7 +27,7 @@ const chartConfig: ChartConfig = {
   },
 }
 
-interface HistoryChartProps {
+type HistoryChartProps = {
   data: Analysis[]
 }
 

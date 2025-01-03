@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { ToastAction } from '@radix-ui/react-toast'
 import { useToast } from '@/hooks/use-toast'
+import { deleteEntry } from '@/utils/api'
 import { EntryCard } from './entry-card'
 import type { JournalEntry } from '@/types'
-import { deleteEntry } from '@/utils/api'
-import { ToastAction } from '@radix-ui/react-toast'
 
 type Props = {
   entries: JournalEntry[]
@@ -21,6 +21,7 @@ const Entries = ({ entries: initialEntries }: Props) => {
 
     try {
       await deleteEntry(id)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error)
 

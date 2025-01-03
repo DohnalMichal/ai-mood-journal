@@ -2,6 +2,8 @@
 
 import { format } from 'date-fns'
 import { capitalize } from 'lodash'
+import { CalendarDays, Circle, Trash2 } from 'lucide-react'
+import Link from 'next/link'
 import { getSentimentEmoji } from '@/utils/ai'
 import {
   Card,
@@ -11,11 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { CalendarDays, Circle, Trash2 } from 'lucide-react'
-import { Button } from './ui/button'
-import Link from 'next/link'
-import type { JournalEntry } from '@/types'
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,6 +24,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+import { Button } from './ui/button'
+import type { JournalEntry } from '@/types'
 
 type Props = {
   entry: JournalEntry
@@ -37,9 +36,9 @@ const EntryCard = ({ entry, onDelete }: Props) => {
   const date = format(new Date(entry.createdAt), 'd MMMM yyyy')
 
   return (
-    <Card className="h-72 flex flex-col justify-between">
+    <Card className="flex h-72 flex-col justify-between">
       <CardHeader>
-        <CardTitle className="flex gap-2 h-8">
+        <CardTitle className="flex h-8 gap-2">
           <Circle
             size={16}
             fill={entry.analysis?.color}
@@ -52,11 +51,11 @@ const EntryCard = ({ entry, onDelete }: Props) => {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <small className="text-sm font-medium leading-none flex items-center gap-2">
+        <small className="flex items-center gap-2 text-sm font-medium leading-none">
           <CalendarDays size={16} /> {date}
         </small>
 
-        <small className="text-sm font-medium leading-none flex items-center gap-2">
+        <small className="flex items-center gap-2 text-sm font-medium leading-none">
           <span className="w-4">
             {getSentimentEmoji(entry.analysis?.sentimentScore)}
           </span>

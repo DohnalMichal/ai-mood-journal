@@ -4,8 +4,7 @@ import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { provideDefaults } from '@/utils/analysis'
 
-export const POST = async (request: Request) => {
-  const data = await request.json()
+export const POST = async () => {
   const user = await getUserByClerkID()
   const entry = await prisma.journalEntry.create({
     data: {

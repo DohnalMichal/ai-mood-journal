@@ -1,15 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useAutosave } from 'react-autosave'
 import { capitalize, toString } from 'lodash'
-import { updateEntry } from '@/utils/api'
-import { provideDefaults } from '@/utils/analysis'
-import { Textarea } from './ui/textarea'
-import { Label } from './ui/label'
-import { CalendarIcon, Circle, Loader2, LoaderCircle } from 'lucide-react'
-import type { JournalEntry } from '@/types'
+import { CalendarIcon, Circle, LoaderCircle } from 'lucide-react'
 
+import { format } from 'date-fns'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -18,11 +16,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { format } from 'date-fns'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { provideDefaults } from '@/utils/analysis'
+import { updateEntry } from '@/utils/api'
+import { Label } from './ui/label'
+import { Textarea } from './ui/textarea'
 import { Form, FormField, FormItem } from './ui/form'
+import type { JournalEntry } from '@/types'
 
 const FormSchema = z.object({
   date: z.date({
@@ -55,8 +54,6 @@ const Editor = ({ entry }: { entry: JournalEntry }) => {
     { name: '🎭 Sentiment', value: toString(sentimentScore) },
   ]
 
-  const value = form.watch('content')
-
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setIsSaving(true)
     const { data: updatedEntry } = await updateEntry(entry.id, {
@@ -69,7 +66,7 @@ const Editor = ({ entry }: { entry: JournalEntry }) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col pr-8">
+    <div className="flex h-full w-full flex-col pr-8">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -80,7 +77,7 @@ const Editor = ({ entry }: { entry: JournalEntry }) => {
                 <Label className="pb-1">Write your thoughts</Label>
                 <Textarea
                   placeholder="Write your journal entry here"
-                  className="w-full h-[250px] px-4 py-2 text-md"
+                  className="text-md h-[250px] w-full px-4 py-2"
                   {...field}
                 />
               </FormItem>
@@ -131,7 +128,7 @@ const Editor = ({ entry }: { entry: JournalEntry }) => {
         </form>
       </Form>
       <div className="mt-10">
-        <div className="flex items-center py-3 gap-2">
+        <div className="flex items-center gap-2 py-3">
           <Circle size={16} fill={color} className="flex-shrink-0" />
           <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Analysis of your journal entry
@@ -142,7 +139,7 @@ const Editor = ({ entry }: { entry: JournalEntry }) => {
           {analysisData.map((item) => (
             <li
               key={item.name}
-              className="pr-2 py-2 flex flex-col items-start gap-1"
+              className="flex flex-col items-start gap-1 py-2 pr-2"
             >
               <span className="text-md font-semibold">{item.name}</span>
               <span>{capitalize(item.value)}</span>

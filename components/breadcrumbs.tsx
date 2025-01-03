@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { Fragment, useEffect, useState } from 'react'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,8 +10,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { Fragment, JSX, useEffect, useState } from 'react'
 import { Skeleton } from './ui/skeleton'
+import type { JSX } from 'react'
 
 const Breadcrumbs = () => {
   const pathname = usePathname()
@@ -27,8 +28,10 @@ const Breadcrumbs = () => {
       // Example: If your path is /journal/[id], fetch the title for the [id]
       if (segments.length >= 2 && segments[0] === 'journal') {
         const id = segments[1]
+
         try {
           const response = await fetch(`/api/journal/${id}`)
+
           if (response.ok) {
             const data = await response.json()
             newLabels[id] = data.title
@@ -45,7 +48,7 @@ const Breadcrumbs = () => {
     }
 
     fetchLabels()
-  }, [pathname])
+  }, [pathname, segments])
 
   // Build the breadcrumb items
   const breadcrumbs = segments.map((segment, index) => {

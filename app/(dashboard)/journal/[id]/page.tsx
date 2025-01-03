@@ -1,5 +1,4 @@
 import { Editor } from '@/components/editor'
-import { analyze } from '@/utils/ai'
 import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 
@@ -32,7 +31,7 @@ const EntryPage = async ({ params }: Props) => {
   }
 
   return (
-    <div className="p-10 h-full">
+    <div className="h-full p-10">
       <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         {entry.analysis?.subject || 'New Journal Entry'}
       </h2>

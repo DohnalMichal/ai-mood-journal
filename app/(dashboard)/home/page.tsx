@@ -10,6 +10,8 @@ import { BentoGrid } from '@/components/ui/bento-grid'
 import { getUserByClerkID } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { calculateStreak } from '@/utils/streaks'
+import { Gauge } from '@/components/gauge'
+import { calculateAverageSentiment } from '@/utils/analysis'
 
 const getEntries = async () => {
   const user = await getUserByClerkID()
@@ -21,7 +23,7 @@ const getEntries = async () => {
       createdAt: 'desc',
     },
     include: {
-      analysis: false,
+      analysis: true,
     },
   })
 
@@ -32,6 +34,7 @@ const HomePage = async () => {
   const entries = await getEntries()
 
   const { streak } = calculateStreak(entries.map((entry) => entry.createdAt))
+  const average = calculateAverageSentiment(entries)
 
   return (
     <div>
@@ -50,6 +53,18 @@ const HomePage = async () => {
           </CardHeader>
           <CardContent className="flex items-center justify-center">
             <Trophy size={48} />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Average sentiment</CardTitle>
+            <CardDescription>
+              Average sentiment for the last 7 days.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col items-center justify-center">
+            <Gauge value={average} />
+            <span className="text-lg font-semibold">{average}</span>
           </CardContent>
         </Card>
       </BentoGrid>
